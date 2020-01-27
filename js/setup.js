@@ -5,6 +5,7 @@ var lastNames = ['да Марья', 'Верон', 'Мирабелла', 'Вал�
 var coats = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210,' +
 ' 55)', 'rgb(0, 0, 0)'];
 var eyes = ['black', 'red', 'blue', 'yellow', 'green'];
+var numberPerson = 4;
 
 // генерация случайного числа от 0 до n
 function random(n) {
@@ -17,7 +18,7 @@ function getRandomItemOfArr(arr) {
 
 function makeArrayPerson() {
   var arr = [];
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < numberPerson; i++) {
     arr.push({
       name: getRandomItemOfArr(names) + ' ' + getRandomItemOfArr(lastNames),
       coatColor: getRandomItemOfArr(coats),
@@ -46,11 +47,14 @@ function makeMug(obj) {
   return wizardElement;
 }
 
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < persons.length; i++) {
-  fragment.appendChild(makeMug(persons[i]));
+function createDomElements() {
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < persons.length; i++) {
+    fragment.appendChild(makeMug(persons[i]));
+  }
+  similarListElement.appendChild(fragment);
 }
-similarListElement.appendChild(fragment);
 
+createDomElements();
 document.querySelector('.setup-similar').classList.remove('hidden');
 userDialog.classList.remove('hidden');
