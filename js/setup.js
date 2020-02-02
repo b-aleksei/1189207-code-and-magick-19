@@ -66,7 +66,6 @@ var setupClose = document.querySelector('.setup-close');
 var KEY_ENTER = 'Enter';
 var KEY_ESC = 'Escape';
 var userNameInput = document.querySelector('.setup-user-name');
-var MIN_NAME_LENGTH = 2;
 var magCoat = document.querySelector('.setup-wizard .wizard-coat');
 var magEyes = document.querySelector('.setup-wizard .wizard-eyes');
 var magFireball = document.querySelector('.setup-fireball-wrap');
@@ -74,7 +73,7 @@ var fbInput = magFireball.querySelector('input');
 var eyesInput = userDialog.querySelector('#eyes');
 var coatInput = userDialog.querySelector('#coat');
 
-//меняем цвет мантии, глаз и фаерброла
+// меняем цвет мантии, глаз и фаерброла
 var getColorMag = function (target, array, input) {
   target.addEventListener('click', function () {
     var color = array[random(array.length - 1)];
@@ -91,7 +90,7 @@ magFireball.addEventListener('click', function () {
   fbInput.value = color;
 });
 
-//показ окна setup
+// показ окна setup
 var onPopupEscPress = function (evt) {
   if (evt.key === KEY_ESC && document.activeElement !== userNameInput) {
     closePopup();
