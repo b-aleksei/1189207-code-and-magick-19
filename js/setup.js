@@ -66,23 +66,25 @@ var setupClose = document.querySelector('.setup-close');
 var KEY_ENTER = 'Enter';
 var KEY_ESC = 'Escape';
 var userNameInput = document.querySelector('.setup-user-name');
-var magCoat = document.querySelector('.setup-wizard .wizard-coat');
-var magEyes = document.querySelector('.setup-wizard .wizard-eyes');
+var magCoat = document.querySelector('.wizard-coat');
+var magEyes = document.querySelector('.wizard-eyes');
 var magFireball = document.querySelector('.setup-fireball-wrap');
 var fbInput = magFireball.querySelector('input');
 var eyesInput = userDialog.querySelector('#eyes');
 var coatInput = userDialog.querySelector('#coat');
 
 // меняем цвет мантии, глаз и фаерброла
-var getColorMag = function (target, array, input) {
-  target.addEventListener('click', function () {
-    var color = array[random(array.length - 1)];
-    target.style.fill = color;
-    input.value = color;
-  });
-};
-getColorMag(magCoat, coatsCopy, coatInput);
-getColorMag(magEyes, eyesCopy, eyesInput);
+magCoat.addEventListener('click', function () {
+  var color = coatsCopy[random(coatsCopy.length - 1)];
+  magCoat.style.fill = color;
+  coatInput.value = color;
+});
+
+magEyes.addEventListener('click', function () {
+  var color = eyesCopy[random(eyesCopy.length - 1)];
+  magEyes.style.fill = color;
+  eyesInput.value = color;
+});
 
 magFireball.addEventListener('click', function () {
   var color = fireball[random(fireball.length - 1)];
@@ -92,10 +94,11 @@ magFireball.addEventListener('click', function () {
 
 // показ окна setup
 var onPopupEscPress = function (evt) {
-  if (evt.key === KEY_ESC && document.activeElement !== userNameInput) {
+  if (evt.key === KEY_ESC && !evt.target.classList.contains('setup-user-name')) {
     closePopup();
   }
 };
+
 var openPopup = function () {
   userDialog.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
