@@ -81,7 +81,7 @@ var creationMug = (function () {
   var magEyes = document.querySelector('.wizard-eyes');
   var magFireball = document.querySelector('.setup-fireball-wrap');
   var fireball = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-
+  var startCoordinats = {};
   var fbInput = magFireball.querySelector('input');
   var eyesInput = userDialog.querySelector('#eyes');
   var coatInput = userDialog.querySelector('#coat');
@@ -114,10 +114,17 @@ var creationMug = (function () {
 
   var openPopup = function () {
     userDialog.classList.remove('hidden');
+    startCoordinats = {
+      x: userDialog.offsetLeft,
+      y: userDialog.offsetTop,
+    };
     document.addEventListener('keydown', onPopupEscPress);
   };
 
   var closePopup = function () {
+    userDialog.style.left = startCoordinats.x + 'px';
+    userDialog.style.top = startCoordinats.y + 'px';
+
     userDialog.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
   };
