@@ -1,5 +1,5 @@
 'use strict';
-var creationMug = (function () {
+window.creationMug = (function () {
 
   var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
   var lastNames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -69,8 +69,8 @@ var creationMug = (function () {
 
 (function () {
 
-  var coatsCopy = creationMug.coats;
-  var eyesCopy = creationMug.eyes;
+  var coatsCopy = window.creationMug.coats;
+  var eyesCopy = window.creationMug.eyes;
   var userDialog = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = document.querySelector('.setup-close');
@@ -88,19 +88,19 @@ var creationMug = (function () {
 
   // меняем цвет мантии, глаз и фаерброла
   magCoat.addEventListener('click', function () {
-    var color = coatsCopy[creationMug.random(coatsCopy.length - 1)];
+    var color = coatsCopy[window.creationMug.random(coatsCopy.length - 1)];
     magCoat.style.fill = color;
     coatInput.value = color;
   });
 
   magEyes.addEventListener('click', function () {
-    var color = eyesCopy[creationMug.random(eyesCopy.length - 1)];
+    var color = eyesCopy[window.creationMug.random(eyesCopy.length - 1)];
     magEyes.style.fill = color;
     eyesInput.value = color;
   });
 
   magFireball.addEventListener('click', function () {
-    var color = fireball[creationMug.random(fireball.length - 1)];
+    var color = fireball[window.creationMug.random(fireball.length - 1)];
     magFireball.style.backgroundColor = color;
     fbInput.value = color;
   });
