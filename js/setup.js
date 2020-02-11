@@ -1,5 +1,6 @@
 'use strict';
-window.creationMug = (function () {
+
+(function () {
 
   var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
   var lastNames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -60,7 +61,7 @@ window.creationMug = (function () {
   createDomElements();
   document.querySelector('.setup-similar').classList.remove('hidden');
 
-  return {
+  window.creationMug = {
     coats: copyCoats,
     eyes: copyEyes,
     random: random,

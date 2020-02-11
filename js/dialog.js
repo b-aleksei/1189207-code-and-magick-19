@@ -7,31 +7,19 @@
   dialogHandler.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
-    var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY
-    };
-
     var dragged = false;
+    var shiftX = evt.clientX - setupDialogElement.offsetLeft;
+    var shiftY = evt.clientY - setupDialogElement.offsetTop;
 
-    var onMouseMove = function (moveEvt) {
-      moveEvt.preventDefault();
+    function moveAt(x, y) {
+      setupDialogElement.style.left = x - shiftX + 'px';
+      setupDialogElement.style.top = y - shiftY + 'px';
+    }
+
+    function onMouseMove(e) {
+      moveAt(e.pageX, e.pageY);
       dragged = true;
-
-      var shift = {
-        x: moveEvt.clientX - startCoords.x,
-        y: moveEvt.clientY - startCoords.y
-      };
-
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-      };
-
-      setupDialogElement.style.top = (setupDialogElement.offsetTop + shift.y) + 'px';
-      setupDialogElement.style.left = (setupDialogElement.offsetLeft + shift.x) + 'px';
-
-    };
+    }
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
