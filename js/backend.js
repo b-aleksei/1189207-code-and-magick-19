@@ -8,22 +8,27 @@
   var OK = 200;
 
   var onError = function (code) {
-    // eslint-disable-next-line no-console
     console.error(code);
   };
 
   var onLoad = function (data) {
-    // eslint-disable-next-line no-console
     console.log(data);
   };
 
   var onHandlerLoad = function (success, error) {
     if (this.status === OK) {
       success(this.response);
-      console.log(this); // срабатывает дважды
     } else {
-      error('Ошибка соединения : ' + this.status + ' ' + this.statusText);
+      error('Соединение завершилось с ошибкой : ' + this.status + ' ' + this.statusText);
     }
+  };
+
+  var onHandlerTimeOut = function () {
+    onError('Запрос не успел выполниться за ' + this.timeout + 'мс');
+  };
+
+  var onHandlerError = function () {
+    onError('Произошла ошибка соединения');
   };
 
 
@@ -35,12 +40,8 @@
     xhr.send();
 
     xhr.addEventListener('load', onHandlerLoad.bind(xhr, success, error));
-    xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
-    });
-    xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
-    });
+    xhr.addEventListener('error', onHandlerError);
+    xhr.addEventListener('timeout', onHandlerTimeOut.bind(xhr));
   };
 
   var save = function (data, success, error) {
@@ -49,18 +50,17 @@
     xhr.open('POST', URL_SAVE);
     xhr.send(data);
 
-    xhr.addEventListener('load', function () {
-      if (xhr.status === OK) {
-        success(xhr.response);
-      } else {
-        error('Ошибка соединения : ' + xhr.status + ' ' + xhr.statusText);
-      }
-    });
+    xhr.addEventListener('load', onHandlerLoad.bind(xhr, success, error));
+    xhr.addEventListener('error', onHandlerError);
+    xhr.addEventListener('timeout', onHandlerTimeOut.bind(xhr));
   };
 
   window.backend = {
     load: load,
     save: save,
   };
+
+  // load(onLoad, onError);
+  // window.backend.save(onLoad, onError);
 
 })();
