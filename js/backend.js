@@ -42,8 +42,6 @@
     error('Произошла ошибка соединения. Проверьте подключение к интернет');
   };
   /* eslint-enable */
-
-
   var load = function (success, error) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';

@@ -29,6 +29,7 @@
     var color = coatsCopy[random(coatsCopy.length - 1)];
     magCoat.style.fill = color;
     coatInput.value = color;
+    console.log('click');
   });
 
   magEyes.addEventListener('click', function () {
