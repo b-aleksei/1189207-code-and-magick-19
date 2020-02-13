@@ -41,4 +41,12 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
+  var form = setupDialogElement.querySelector('.setup-wizard-form');
+  form.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(form), function (response) {
+      setupDialogElement.classList.add('hidden');
+    });
+    evt.preventDefault();
+  });
+
 })();
