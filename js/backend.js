@@ -2,7 +2,8 @@
 
 (function () {
 
-  var TIMEOUT_IN_MS = 1000;
+  var TIMEOUT_MS = 1000;
+  var DELAY_ERROR_MS = 3000;
   var URL_LOAD = 'https://js.dump.academy/code-and-magick/data';
   var URL_SAVE = 'https://js.dump.academy/code-and-magick';
   var errorType = {
@@ -20,7 +21,7 @@
     document.body.insertAdjacentElement('afterbegin', node);
     setTimeout(function () {
       node.remove();
-    }, 3000);
+    }, DELAY_ERROR_MS);
   };
   /* eslint-disable */
   var onHandlerLoad = function (success, error) {
@@ -47,7 +48,7 @@
   var load = function (success, error) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    xhr.timeout = TIMEOUT_IN_MS;
+    xhr.timeout = TIMEOUT_MS;
     xhr.open('GET', URL_LOAD);
     try {
       xhr.send();
