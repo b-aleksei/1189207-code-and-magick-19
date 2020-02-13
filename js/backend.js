@@ -9,7 +9,7 @@
     200: 'OK',
     404: 'Cтраница не найдена, проверьте коректность адреса',
     500: 'Сервер временно не доступен, скоро все заработает',
-    unknown: 'Неизвестная ошибка, попробуйте позднее'
+    unknown: 'Неизвестная ошибка, попробуйте позднее',
   };
 
   var errorHandler = function (errorMessage) {
@@ -22,35 +22,40 @@
       node.remove();
     }, 3000);
   };
-/* eslint-disable */
+  /* eslint-disable */
   var onHandlerLoad = function (success, error) {
     switch (this.status) {
-      case 200 : success(this.response);
-      break;
-      case 404 : error(this.status + ' ' + errorType[404]);
-      break;
-      case 500 : error(this.status + ' ' + errorType[500]);
-      break;
-      default : error(this.status + ' ' + errorType.unknown);
+      case 200 :
+        success(this.response);
+        break;
+      case 404 :
+        error(this.status + ' ' + errorType[404]);
+        break;
+      case 500 :
+        error(this.status + ' ' + errorType[500]);
+        break;
+      default :
+        error(this.status + ' ' + errorType.unknown);
     }
   };
 
   var onHandlerTimeOut = function (error) {
     error('Запрос не успел выполниться за ' + this.timeout + 'мс');
   };
-  var onHandlerError = function (error) {
-    error('Произошла ошибка соединения. Проверьте подключение к интернет');
-  };
+
   /* eslint-enable */
   var load = function (success, error) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.timeout = TIMEOUT_IN_MS;
     xhr.open('GET', URL_LOAD);
-    xhr.send();
+    try {
+      xhr.send();
+    } catch (e) {
+      error('Произошла ошибка соединения. Проверьте подключение к интернет');
+    }
 
     xhr.addEventListener('load', onHandlerLoad.bind(xhr, success, error));
-    xhr.addEventListener('error', onHandlerError.bind(xhr, error));
     xhr.addEventListener('timeout', onHandlerTimeOut.bind(xhr, error));
   };
 
@@ -58,17 +63,20 @@
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.open('POST', URL_SAVE);
-    xhr.send(data);
+    try {
+      xhr.send(data);
+    } catch (e) {
+      error('Произошла ошибка соединения. Проверьте подключение к интернет');
+    }
 
     xhr.addEventListener('load', onHandlerLoad.bind(xhr, success, error));
-    xhr.addEventListener('error', onHandlerError.bind(xhr, error));
     xhr.addEventListener('timeout', onHandlerTimeOut.bind(xhr, error));
   };
 
   window.backend = {
     load: load,
     save: save,
-    errorHandler: errorHandler
+    errorHandler: errorHandler,
   };
 
 })();
