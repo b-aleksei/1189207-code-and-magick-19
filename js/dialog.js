@@ -41,9 +41,8 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  var successHandler = function (success) {
+  var successHandler = function () {
     setupDialogElement.classList.add('hidden');
-    console.log(success);
   };
 
   var form = setupDialogElement.querySelector('.setup-wizard-form');
