@@ -2,8 +2,9 @@
 
 (function () {
 
-  var coatsCopy = window.creationMug.coats;
-  var eyesCopy = window.creationMug.eyes;
+  var coatsCopy = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210,' +
+  ' 55)', 'rgb(0, 0, 0)'];
+  var eyesCopy = ['black', 'red', 'blue', 'yellow', 'green'];
   var userDialog = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = document.querySelector('.setup-close');
@@ -19,21 +20,25 @@
   var eyesInput = userDialog.querySelector('#eyes');
   var coatInput = userDialog.querySelector('#coat');
 
+  // генерация случайного числа от 0 до n
+  var random = function (n) {
+    return Math.floor(Math.random() * (n + 1));
+  };
   // меняем цвет мантии, глаз и фаерброла
   magCoat.addEventListener('click', function () {
-    var color = coatsCopy[window.creationMug.random(coatsCopy.length - 1)];
+    var color = coatsCopy[random(coatsCopy.length - 1)];
     magCoat.style.fill = color;
     coatInput.value = color;
   });
 
   magEyes.addEventListener('click', function () {
-    var color = eyesCopy[window.creationMug.random(eyesCopy.length - 1)];
+    var color = eyesCopy[random(eyesCopy.length - 1)];
     magEyes.style.fill = color;
     eyesInput.value = color;
   });
 
   magFireball.addEventListener('click', function () {
-    var color = fireball[window.creationMug.random(fireball.length - 1)];
+    var color = fireball[random(fireball.length - 1)];
     magFireball.style.backgroundColor = color;
     fbInput.value = color;
   });
