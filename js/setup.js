@@ -15,15 +15,17 @@
     return wizardElement;
   };
 
-  var successHandler = function (arr) {
-    var fragment = document.createDocumentFragment();
+  var render = function (arr) {
+    // var fragment = document.createDocumentFragment();
+    similarListElement.innerHTML = '';
     for (var i = 0; i < numberPerson; i++) {
-      fragment.appendChild(makeMug(arr[i]));
+      similarListElement.appendChild(makeMug(arr[i]));
     }
-    similarListElement.appendChild(fragment);
+    // similarListElement.appendChild(fragment);
   };
 
-  window.backend.load(successHandler, window.backend.errorHandler);
-  document.querySelector('.setup-similar').classList.remove('hidden');
+  window.setup = {
+    render: render
+  };
 
 })();

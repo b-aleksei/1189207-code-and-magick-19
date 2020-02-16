@@ -2,9 +2,9 @@
 
 (function () {
 
-  var coatsCopy = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210,' +
+  var coats = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210,' +
   ' 55)', 'rgb(0, 0, 0)'];
-  var eyesCopy = ['black', 'red', 'blue', 'yellow', 'green'];
+  var eyes = ['black', 'red', 'blue', 'yellow', 'green', 'purple', 'orange'];
   var userDialog = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = document.querySelector('.setup-close');
@@ -26,15 +26,17 @@
   };
   // меняем цвет мантии, глаз и фаерброла
   magCoat.addEventListener('click', function () {
-    var color = coatsCopy[random(coatsCopy.length - 1)];
+    var color = coats[random(coats.length - 1)];
     magCoat.style.fill = color;
     coatInput.value = color;
+    window.render.onCoatChange(color);
   });
 
   magEyes.addEventListener('click', function () {
-    var color = eyesCopy[random(eyesCopy.length - 1)];
+    var color = eyes[random(eyes.length - 1)];
     magEyes.style.fill = color;
     eyesInput.value = color;
+    window.render.onEyesChange(color);
   });
 
   magFireball.addEventListener('click', function () {
