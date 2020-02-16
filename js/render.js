@@ -2,31 +2,24 @@
 
 (function () {
 
-  var coatColor;
-  var eyesColor;
+  var magCoat = document.querySelector('.wizard-coat');
+  var coatColor = magCoat.style.fill;
+  var eyesColor = 'black';
   var arrWizards = [];
 
   var getRank = function (objWizard) {
     var rank = 0;
-
-    if (objWizard.colorCoat === coatColor) {
+    if (objWizard['colorCoat'] === coatColor) {
       rank += 2;
     }
-    if (objWizard.colorEyes === eyesColor) {
+    if (objWizard['colorEyes'] === eyesColor) {
       rank += 1;
     }
-
     return rank;
   };
 
   var namesComparator = function (left, right) {
-    if (left > right) {
-      return 1;
-    } else if (left < right) {
-      return -1;
-    } else {
-      return 0;
-    }
+    return left - right;
   };
 
   var updateWizards = function () {
@@ -38,24 +31,21 @@
       return rankDiff;
     }));
   };
-
-  // Перезаписываем обработчики-пустышки,
-  // объявленные в render.js
-  var onEyesChange = function (color) {
+  // отслеживаем изменение цвета мантии и глаз
+  var onEyesChange = window.debounce(function (color) {
     eyesColor = color;
     updateWizards();
-  };
+  });
 
-  // И обработчик на смену цвета мантии
-  var onCoatChange = function (color) {
+  var onCoatChange = window.debounce(function (color) {
     coatColor = color;
     updateWizards();
-  };
+  });
+
 
   var successHandler = function (arr) {
     arrWizards = arr;
     window.setup.render(arr);
-    // updateWizards();
   };
 
   window.backend.load(successHandler, window.backend.errorHandler);
@@ -64,7 +54,7 @@
 
   window.render = {
     onCoatChange: onCoatChange,
-    onEyesChange: onEyesChange
+    onEyesChange: onEyesChange,
   };
 
 })();

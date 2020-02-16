@@ -16,12 +16,10 @@
   };
 
   var render = function (arr) {
-    // var fragment = document.createDocumentFragment();
     similarListElement.innerHTML = '';
     for (var i = 0; i < numberPerson; i++) {
       similarListElement.appendChild(makeMug(arr[i]));
     }
-    // similarListElement.appendChild(fragment);
   };
 
   window.setup = {
