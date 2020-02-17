@@ -18,15 +18,15 @@
     return rank;
   };
 
-  var namesComparator = function (left, right) {
-    return left - right;
+  var namesComparator = function (right, left) {
+    return right - left;
   };
 
   var updateWizards = function () {
-    window.setup.render(arrWizards.sort(function (left, right) {
-      var rankDiff = getRank(right) - getRank(left);
+    window.setup.render(arrWizards.sort(function (right, left) {
+      var rankDiff = getRank(left) - getRank(right);
       if (rankDiff === 0) {
-        rankDiff = namesComparator(left.name, right.name);
+        rankDiff = namesComparator(right.name, left.name);
       }
       return rankDiff;
     }));
