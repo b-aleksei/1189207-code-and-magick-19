@@ -9,9 +9,7 @@
       if (lastTimeout) {
         clearTimeout(lastTimeout);
       }
-      lastTimeout = setTimeout(function () {
-        callback(arg);
-      }, DEBOUNCE_INTERVAL);
+      lastTimeout = setTimeout(callback, DEBOUNCE_INTERVAL, arg);
     };
   };
 })();
