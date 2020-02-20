@@ -13,7 +13,7 @@
     });
 
     if (matches) {
-      var blob = new Blob([file], {type: 'image/jpg'});
+      var blob = new Blob([file]);
       preview.src = URL.createObjectURL(blob);
 
     }
